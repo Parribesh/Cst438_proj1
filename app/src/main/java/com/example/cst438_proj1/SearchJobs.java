@@ -7,7 +7,7 @@ public class SearchJobs {
 
     /**
      * Type in Search bar
-     * Try to integrate dropdown menu
+     * Try to integrate dropdown menu 
      * switch to a view that shows results?
      */
 }
