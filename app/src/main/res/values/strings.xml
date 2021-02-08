@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Cst438_proj1</string>
+    <string name="title_activity_search_results">Results</string>
+    <string name="title_activity_search_jobs">Job Search</string>
 </resources>
