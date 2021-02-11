@@ -1,14 +1,28 @@
-package com.example.cst438_proj1;
+package com.example.cst438_proj1.data;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "USER_TABLE")
 public class User {
+    @PrimaryKey
     private int Id;
+
     private String userName;
     private String password;
+    private String location;
 
-    public User(int id, String userName, String password) {
-        Id = id;
+    public User(String userName, String password) {
         this.userName = userName;
         this.password = password;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public int getId() {
