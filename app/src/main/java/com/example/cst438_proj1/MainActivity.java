@@ -31,15 +31,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-//        UserDao userDao = db.userDao();
-//        User user1 = new User("Paribesh", "Neupane");
-//        User user2 = new User("Hero", "Nepali");
-//        userDao.insertUsers(user1, user2);
-//
-//        List<User> user = userDao.getAll();
-
-
-
     }
 
 }

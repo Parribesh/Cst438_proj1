@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -45,6 +46,7 @@ public class LoginActivity extends AppCompatActivity {
                     isValid = validate(inputName, inputPassword);
                     if(!isValid){
                         //Toast.makeText(MainActivity.this, "Incorrect credentials Entered", Toast.LENGTH_SHORT).show();
+                        eName.setError("Invalid");
                         ePassword.setError("Invalid password");
                     }else{
                         //Add the code to go to new activity
@@ -69,6 +71,12 @@ public class LoginActivity extends AppCompatActivity {
     private boolean validate(String name, String password){
         UserDatabase db = UserDatabase.getInMemoryDatabase(getApplicationContext());
         User user = db.getUserDAO().getUserByUsername(name);
+        if(user != null) {
+            Toast.makeText(LoginActivity.this, user.getUserName() + " Account Found", Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(LoginActivity.this, name +  " Not Account Found", Toast.LENGTH_SHORT).show();
+            return false;
+        }
         if(name.equals(user.getUserName()) && password.equals(user.getPassword())){
             return true;
         }

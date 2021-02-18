@@ -51,6 +51,12 @@ public class SearchJobs extends AppCompatActivity {
         });
     }
 
+    public static Intent getIntent(Context context, String value ) {
+        Intent intent = new Intent(context, SearchJobs.class);
+        intent.putExtra(SearchJobs.ACTIVITY_LABEL, value);
+        return intent;
+    }
+
     private void statusMessages(String message){
         Toast toast = Toast.makeText(this, message, Toast.LENGTH_LONG);
         toast.setGravity(Gravity.CENTER, 0, 0);
