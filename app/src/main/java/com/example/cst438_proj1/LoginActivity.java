@@ -71,18 +71,22 @@ public class LoginActivity extends AppCompatActivity {
     private boolean validate(String name, String password){
         UserDatabase db = UserDatabase.getInMemoryDatabase(getApplicationContext());
         User user = db.getUserDAO().getUserByUsername(name);
+
+        if(name.equals("admin") && password.equals("12345")){
+            return true;
+        }
+
         if(user != null) {
             Toast.makeText(LoginActivity.this, user.getUserName() + " Account Found", Toast.LENGTH_SHORT).show();
-        }else{
+        }
+        else if(user == null){
             Toast.makeText(LoginActivity.this, name +  " Not Account Found", Toast.LENGTH_SHORT).show();
             return false;
         }
         if(name.equals(user.getUserName()) && password.equals(user.getPassword())){
             return true;
         }
-        if(name.equals(Admin) && password.equals(aPassword)){
-            return true;
-        }
+
         return false;
     }
 
