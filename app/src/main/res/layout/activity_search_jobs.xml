@@ -14,7 +14,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/jobTitle"
+        app:layout_constraintTop_toBottomOf="@+id/locationName"
         app:layout_constraintVertical_bias="0.125" />
 
     <EditText
@@ -28,7 +28,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/locationName"
+        app:layout_constraintTop_toBottomOf="@+id/tvTest"
         app:layout_constraintVertical_bias="0.075" />
 
     <TextView
@@ -54,7 +54,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTest" />
+        app:layout_constraintTop_toBottomOf="@+id/jobTitle" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
