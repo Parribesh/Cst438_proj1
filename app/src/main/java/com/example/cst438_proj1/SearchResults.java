@@ -9,6 +9,14 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class SearchResults extends AppCompatActivity {
     /**
      * Display jobs depending on criteria put in SearchJobs
@@ -30,6 +38,34 @@ public class SearchResults extends AppCompatActivity {
         topMsg.setText("Results:");
         topMsg.setTextSize(20);
 
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://jooble.org/api/c7971ef2-0941-46ac-a994-feab09d3f4b8")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        PlaceHolderAPI jsonPlaceHolder = retrofit.create(PlaceHolderAPI.class);
+        Call<List<SeachCred>> call = jsonPlaceHolder.getSearchInfo();
+
+        call.enqueue(new Callback<List<SeachCred>>() {
+            @Override
+            public void onResponse(Call<List<SeachCred>> call, Response<List<SeachCred>> response) {
+                if(!response.isSuccessful()){
+                    results.setText("Error: " + response.code());
+                    return;
+                }
+                List<SeachCred> posts = response.body();
+                for(SeachCred s : posts){
+                    String content = "";
+                    content += s.getJobName() + "\n";
+                    content += s.getLocation() + "\n";
+                    results.append(content);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<SeachCred>> call, Throwable t) {
+
+            }
+        });
         backBtn.setOnClickListener(view -> {
             Intent intent = new Intent(SearchResults.this, SearchJobs.class);
             startActivity(intent);
