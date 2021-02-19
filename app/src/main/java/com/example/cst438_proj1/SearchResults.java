@@ -22,6 +22,7 @@ public class SearchResults extends AppCompatActivity {
      * Display jobs depending on criteria put in SearchJobs
      *
      */
+    private static final String API_KEY = "c7971ef2-0941-46ac-a994-feab09d3f4b8";
     private TextView results;
     private TextView topMsg;
     private Button backBtn;
@@ -39,11 +40,11 @@ public class SearchResults extends AppCompatActivity {
         topMsg.setTextSize(20);
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://jooble.org/api/c7971ef2-0941-46ac-a994-feab09d3f4b8")
+                .baseUrl("https://jooble.org/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         PlaceHolderAPI jsonPlaceHolder = retrofit.create(PlaceHolderAPI.class);
-        Call<List<SeachCred>> call = jsonPlaceHolder.getSearchInfo();
+        Call<List<SeachCred>> call = jsonPlaceHolder.getSearchInfo(API_KEY);
 
         call.enqueue(new Callback<List<SeachCred>>() {
             @Override
