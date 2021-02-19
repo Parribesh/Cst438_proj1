@@ -47,6 +47,8 @@ public class SearchJobs extends AppCompatActivity {
                 statusMessages("Missing search credentials!");
             }
             Intent intent = new Intent(SearchJobs.this, SearchResults.class);
+            intent.putExtra("jobName", jobName);
+            intent.putExtra("jobLocation", location);
             startActivity(intent);
         });
     }
