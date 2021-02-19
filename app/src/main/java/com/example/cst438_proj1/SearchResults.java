@@ -83,7 +83,4 @@ public class SearchResults extends AppCompatActivity {
             startActivity(intent);
         });
     }
-    private void searchInfo(){
-
-    }
 }
