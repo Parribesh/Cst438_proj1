@@ -40,7 +40,7 @@ public class SearchResults extends AppCompatActivity {
         topMsg.setTextSize(20);
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://jooble.org/api/")
+                .baseUrl("jooble.org")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         PlaceHolderAPI jsonPlaceHolder = retrofit.create(PlaceHolderAPI.class);

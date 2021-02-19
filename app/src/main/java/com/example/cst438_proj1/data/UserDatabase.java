@@ -18,7 +18,9 @@ public abstract class UserDatabase extends RoomDatabase {
     public static UserDatabase getInMemoryDatabase(Context context) {
         if (INSTANCE == null) {
             INSTANCE =
-                    Room.inMemoryDatabaseBuilder(context, UserDatabase.class).allowMainThreadQueries().build();
+                    (UserDatabase) Room.databaseBuilder(context, UserDatabase.class, UserDatabase.DB_NAME)
+                    .allowMainThreadQueries()
+                    .build();
         }
         return INSTANCE;
     }
