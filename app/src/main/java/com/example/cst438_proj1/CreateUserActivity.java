@@ -6,6 +6,7 @@ import androidx.room.Room;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -13,6 +14,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.cst438_proj1.data.User;
+import com.example.cst438_proj1.data.UserDAO;
 import com.example.cst438_proj1.data.UserDatabase;
 
 public class CreateUserActivity extends AppCompatActivity {
@@ -41,11 +43,20 @@ public class CreateUserActivity extends AppCompatActivity {
             public void onClick(View v) {
                 User user = new User(eName.getText().toString(), ePassword.getText().toString());
                 UserDatabase db = UserDatabase.getInMemoryDatabase(v.getContext());
-                db.getUserDAO().insert(user);
-                Toast.makeText(CreateUserActivity.this, "Account Created", Toast.LENGTH_SHORT).show();
+                if(db.getUserDAO().getUserByUsername(user.getUserName()) == null){
+                    db.getUserDAO().insert(user);
+                    Toast.makeText(CreateUserActivity.this, "Account Created", Toast.LENGTH_SHORT).show();
+
+                }
+                else{
+                    Toast.makeText(CreateUserActivity.this, "Account Already Created", Toast.LENGTH_SHORT).show();
+
+                }
                 Intent intent = new Intent(CreateUserActivity.this, LoginActivity.class);
                 startActivity(intent);
+
             }
+
         });
     }
 

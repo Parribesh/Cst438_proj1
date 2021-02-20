@@ -28,6 +28,7 @@ public class SearchResults extends AppCompatActivity {
     private Button backBtn;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
+        SeachCred search = new SeachCred("Teacher", "Salinas");
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_search_results);
@@ -40,11 +41,11 @@ public class SearchResults extends AppCompatActivity {
         topMsg.setTextSize(20);
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("jooble.org")
+                .baseUrl("https://jooble.org/api")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         PlaceHolderAPI jsonPlaceHolder = retrofit.create(PlaceHolderAPI.class);
-        Call<List<SeachCred>> call = jsonPlaceHolder.getSearchInfo(API_KEY);
+        Call<List<SeachCred>> call = jsonPlaceHolder.getSearchInfo(API_KEY, search);
 
         call.enqueue(new Callback<List<SeachCred>>() {
             @Override
