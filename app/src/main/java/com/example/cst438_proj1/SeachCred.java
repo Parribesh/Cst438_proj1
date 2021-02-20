@@ -1,19 +1,24 @@
 package com.example.cst438_proj1;
 
+import com.google.gson.annotations.SerializedName;
+
 public class SeachCred {
-    private String title;
+    @SerializedName("title")
+    private String jobName;
+
+    @SerializedName("location")
     private String location;
 
+    @SerializedName("description")
+    private String desc;
+
     public String getJobName() {
-        return title;
+        return jobName;
     }
 
     public String getLocation() {
         return location;
     }
 
-    public SeachCred(String title, String location) {
-        this.title = title;
-        this.location = location;
-    }
+    public String getDesc(){ return desc; }
 }

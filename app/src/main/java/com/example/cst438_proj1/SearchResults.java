@@ -9,6 +9,9 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.util.List;
 
 import retrofit2.Call;
@@ -23,29 +26,35 @@ public class SearchResults extends AppCompatActivity {
      *
      */
     private static final String API_KEY = "c7971ef2-0941-46ac-a994-feab09d3f4b8";
+    private String jobDesc;
+    private String jobLocation;
     private TextView results;
     private TextView topMsg;
     private Button backBtn;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        SeachCred search = new SeachCred("Teacher", "Salinas");
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_search_results);
 
+        Bundle searchInfo = getIntent().getExtras();
         results = findViewById(R.id.result);
         topMsg = findViewById(R.id.welcomeMsg);
         backBtn = findViewById(R.id.backBtn);
-
+        jobDesc = searchInfo.getString("jobName");
+        jobLocation = searchInfo.getString("jobLocation");
         topMsg.setText("Results:");
         topMsg.setTextSize(20);
 
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://jooble.org/api")
-                .addConverterFactory(GsonConverterFactory.create())
+                .baseUrl("https://jobs.github.com/")
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
         PlaceHolderAPI jsonPlaceHolder = retrofit.create(PlaceHolderAPI.class);
-        Call<List<SeachCred>> call = jsonPlaceHolder.getSearchInfo(API_KEY, search);
+        Call<List<SeachCred>> call = jsonPlaceHolder.getSearchInfo(jobDesc, jobLocation);
 
         call.enqueue(new Callback<List<SeachCred>>() {
             @Override
@@ -59,13 +68,14 @@ public class SearchResults extends AppCompatActivity {
                     String content = "";
                     content += s.getJobName() + "\n";
                     content += s.getLocation() + "\n";
+                    content += s.getDesc() + "\n";
                     results.append(content);
                 }
             }
 
             @Override
             public void onFailure(Call<List<SeachCred>> call, Throwable t) {
-
+                results.setText(t.getMessage());
             }
         });
         backBtn.setOnClickListener(view -> {
