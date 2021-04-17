@@ -6,7 +6,7 @@ android:
       - tools
       - platform-tools
       - tools
-      - build-tools-30.5.4
+      - build-tools-31.0.1
       - android-29
       - extra-android-m2repository
 #optional, use it if only you haven't give permission yet.
